@@ -30,7 +30,7 @@ body {
 			</form>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="active"><a href="#">Home</a></li>
-				<li><a href="tmps.html">Map</a></li>
+				<li><a href="marker.html">Map</a></li>
 
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Explore<b class="caret"></b></a>

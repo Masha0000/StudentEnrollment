@@ -1,3 +1,9 @@
+package com.github.elizabetht;
+
+import com.github.elizabetht.config.RootConfig;
+import com.github.elizabetht.config.WebConfig;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override

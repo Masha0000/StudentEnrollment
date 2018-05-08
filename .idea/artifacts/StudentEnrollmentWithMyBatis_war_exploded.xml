@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="StudentEnrollmentWithMyBatis:war exploded">
-    <output-path>$PROJECT_DIR$/StudentEnrollmentWithMyBatis-master/target/StudentEnrollmentWithMyBatis</output-path>
+    <output-path>$PROJECT_DIR$/StudentEnrollmentWithMyBatis-master/target/StudentEnrollmentWithMyBatis-1.8-SNAPSHOT</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -31,10 +31,12 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.5.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.5.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.5.0" />
+          <element id="library" level="project" name="Maven: cglib:cglib:2.2.2" />
+          <element id="library" level="project" name="Maven: asm:asm:3.3.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/StudentEnrollmentWithMyBatis-master/target/StudentEnrollmentWithMyBatis/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/StudentEnrollmentWithMyBatis-master/target/StudentEnrollmentWithMyBatis-1.8-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="StudentEnrollmentWithMyBatis/web/Web" />
     </root>

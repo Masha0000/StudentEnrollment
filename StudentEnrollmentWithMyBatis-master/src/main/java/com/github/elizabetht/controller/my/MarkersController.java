@@ -25,7 +25,7 @@ public class MarkersController {
         return "marker";//???
     }
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/")
     public String openIndex(Model model) {
         model.addAttribute("message", "Open");
         return "index";//???
