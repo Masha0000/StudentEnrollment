@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/StudentEnrollmentWithMyBatis-master/StudentEnrollmentWithMyBatis.iml" filepath="$PROJECT_DIR$/StudentEnrollmentWithMyBatis-master/StudentEnrollmentWithMyBatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/StudentEnrollmentWithMyBatis-master.iml" filepath="$PROJECT_DIR$/.idea/StudentEnrollmentWithMyBatis-master.iml" />
+    </modules>
+  </component>
+</project>
