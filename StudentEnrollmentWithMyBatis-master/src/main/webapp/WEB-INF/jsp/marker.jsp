@@ -42,6 +42,6 @@
         </select>
       </div>
     </form>
-    <script src="/resources/markers.js"></script>
+    <script src="resources/markers.js"></script>
   </body>
 </html>

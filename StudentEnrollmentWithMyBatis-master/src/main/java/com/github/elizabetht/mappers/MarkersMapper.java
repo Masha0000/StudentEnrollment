@@ -3,12 +3,13 @@ package com.github.elizabetht.mappers;
 import com.github.elizabetht.mappers.modelBase.FigureBase;
 import com.github.elizabetht.mappers.modelBase.Figure_to_point;
 import com.github.elizabetht.mappers.modelBase.PointBase;
+import com.github.elizabetht.model.my.Figure;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
-import com.github.elizabetht.model.my.Figure;
 
 import java.util.ArrayList;
+
 
 public interface MarkersMapper {
 
@@ -23,7 +24,6 @@ public interface MarkersMapper {
                         "</foreach>;*/
 
 
-
     final String INSERTFIGURE = "insert into figure (type) values (#{type})";
 
     @Insert(INSERTFIGURE)
@@ -31,30 +31,24 @@ public interface MarkersMapper {
     void insertFigure(FigureBase post);
 
 
-    final String INSERTPOINTLIST ="INSERT INTO MARKERS.POINT(LAT,LON) VALUES <foreach collection='pointArr'" +
+    final String INSERTPOINTLIST = "INSERT INTO MARKERS.POINT(LAT,LON) VALUES <foreach collection='pointArr'" +
             "item='element' open='(' separator=','  close=')'> #{element.lat}, #{element.lon}";
 
     @Insert(INSERTPOINTLIST)
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-
-
     void insertPoint(ArrayList<PointBase> pointArr);
 
-        final String INSERTfiguretoPOINT ="INSERT INTO MARKERS.figure_to_point(figure_id,point_id,order) " +
-                "VALUES <foreach collection='figureToPointList'" +
+    final String INSERTfiguretoPOINT = "INSERT INTO MARKERS.figure_to_point(figure_id,point_id,order) " +
+            "VALUES <foreach collection='figureToPointList'" +
             "item='element' open='(' separator=','  close=')'> #{element.order}, #{element.id_figure}, #{element.id_point}";
 
     @Insert(INSERTfiguretoPOINT)
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-
-
-
-
-
     void insert(ArrayList<Figure_to_point> figureToPointList);
 
     @Select("SELECT point.lat, point.lon, figure.id district from point join figure_to_point on figure_to_point.point_id=point.id join figure " +
-            "figure_to_point.figure_id=figure.id order by figure_to_point.order")//WHERE id = #{id}")
+            "figure_to_point.figure_id=figure.id order by figure_to_point.order")
+//WHERE id = #{id}")
     Figure selectFigure();//что делать с селектами
 
 

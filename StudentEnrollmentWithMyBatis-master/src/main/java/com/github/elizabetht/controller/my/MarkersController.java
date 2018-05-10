@@ -1,7 +1,7 @@
 package com.github.elizabetht.controller.my;
 
 import com.github.elizabetht.model.my.*;
-import com.github.elizabetht.service.my.ServiceFigure;
+import com.github.elizabetht.service.my.FigureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class MarkersController {
     @Autowired
-    private ServiceFigure figureService;
-    //Проще говоря, аннотация используется для сопоставления веб-запросов
-    //с методами Spring Controller.
+    private FigureService figureService;
 
-
-    @RequestMapping(value ={"/modify"},method = RequestMethod.POST)
+    @RequestMapping(value ="/modify",method = RequestMethod.POST)
     public String saveFigure(@RequestBody FeatureJs marker)//{ throws NotFoundException {
     {
         Figure markerController = new Figure(marker);
@@ -30,8 +27,16 @@ public class MarkersController {
         model.addAttribute("message", "Open");
         return "index";//???
     }
+/*
+    @RequestMapping(value = "/marker",method=RequestMethod.POST)
+    public String saveFigure(Model model) {
+        model.addAttribute("message", "Open");
+        return "marker";//???
+    }*/
 
-    @RequestMapping(value = "/marker")
+
+
+    @RequestMapping(value = "/marker",method=RequestMethod.GET)
     public String openMap(Model model) {
         model.addAttribute("message", "Open");
         return "marker";//???

@@ -11,7 +11,7 @@ import com.github.elizabetht.model.my.Figure;
  com.github.elizabetht.service для поддержки операций уровня обслуживания.
 * */
 
-public interface ServiceFigure {
+public interface FigureService {
     void insertFigure(Figure p);
 
     Figure ReadModel();

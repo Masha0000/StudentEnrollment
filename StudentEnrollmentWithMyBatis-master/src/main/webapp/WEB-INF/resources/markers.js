@@ -1,7 +1,7 @@
 var  coordinates=[];
 var typeFeature;
 var typeFeatureAdd;
-    var  coordinatesAdd=[];
+var  coordinatesAdd=[];
   var   coordinatesFeatureDel;
   var typeFeatureDel;
 var raster = new ol.layer.Tile({
@@ -62,7 +62,7 @@ coordinatesFeatureDel=features[0].getGeometry().getCoordinates();
 console.log(coordinatesFeatureDel);
 typeFeature=features[0].getGeometry().getType();
 console.log(typeFeature);
-
+/*
 
 var featureDelete = {
         name: typeFeatureDel,
@@ -84,7 +84,7 @@ var featureDelete = {
         }
       }
       )
-
+*/
 vector.getSource().removeFeature(features[0]);
 //console.log(features[0].id);
 selectedFeatures.forEach(selectedFeatures.remove, selectedFeatures);
@@ -103,92 +103,74 @@ Delete.init();
 
 var Modify = {
   init: function() {
-    this.select = new ol.interaction.Select();
-    map.addInteraction(this.select);
+        this.select = new ol.interaction.Select();
+        map.addInteraction(this.select);
 
-    this.modify = new ol.interaction.Modify({
-      features: this.select.getFeatures()
-    });
-    map.addInteraction(this.modify);
+        this.modify = new ol.interaction.Modify({
+          features: this.select.getFeatures()
+        });
+        map.addInteraction(this.modify);
 
-    this.setEvents();
+        this.setEvents();
 
-      var feature = {
-                name: typeFeature,
-                coords: coordinates,
+     },
+
+    setEvents: function() {
+          var selectedFeatures = this.select.getFeatures();
+
+          this.select.on('change:active', function() {
+              selectedFeatures.forEach(selectedFeatures.remove, selectedFeatures);
+          });
+
+
+          var i=0;
+
+          this.select.on('select', function(event) {
+            coordinates[i]=event.selected[0].getGeometry().getCoordinates();
+            console.log(coordinates[i]);
+            typeFeature=event.selected[0].getGeometry().getType();
+
+
+              console.log(typeFeature);
+              var feature = {
+                  name: typeFeature,
+                  coord: coordinates[0]
 
               };
-              // json["name"] = type;
-              // json["coordinates"] = coordinates;
-
               $.ajax({
-                type: 'POST',
-                url:'/modify',
-                data: feature, // JSON.stringify()
-                dataType:'json',
-                contentType:'application/json;charset=utf-8',
-                success:function(data){
-                  console.log(data);
-                //  $("#answer").addClass("ok");
-                //  document.getElementById("answer").innerTexy = "Вы  добавили/изменили объект!"ж
-                },
+                      type: 'POST',
+                      url:"/modify",
+                      data:  JSON.stringify(feature),
+                      dataType:'json',
+                      contentType:'application/json;charset=utf-8',
+                      success:function(data){
+                          console.log(data);
+                          alert("success");
+
+                      },
                       error:function (e) {
-                          alert('error');
+                          alert('error post');
 
                       }
-              }
-              )
+                  }
+              );
 
+              console.log("Post");
 
-                /*var json={};
-
-
-
-                json["type"] = typeFeature;
-                json["coordinates"] = coordinates;
-
-                $.post({
-                 // type: 'POST',
-                  url:'/modify',
-                  data:JSON.stringify(json),
-                  dataType:'json',
-                  contentType:'application/json;charset=utf-8',
-                  success:function(data){
-                    console.log(data);
-                    console.log('success');
-                  //  $("#answer").addClass("ok");
-                  //  document.getElementById("answer").innerTexy = "Вы  добавили/изменили объект!"ж
-                  },
-                    error:function (e) {
-                    alert('error');
-
-                    }
-                }
-                )
-*/
-            },
-    setEvents: function() {
-      var selectedFeatures = this.select.getFeatures();
-
-      this.select.on('change:active', function() {
-        selectedFeatures.forEach(selectedFeatures.remove, selectedFeatures);
       });
+      //  this.setPost(typeFeature,coordinates);
 
-
-      var i=0;
-      this.select.on('select', function(event) {
-        coordinates[i]=event.selected[0].getGeometry().getCoordinates();
-        console.log(coordinates[i]);
-        typeFeature=event.selected[0].getGeometry().getType();
-        console.log(type);
-      });
     },
+
     setActive: function(active) {
       this.select.setActive(active);
       this.modify.setActive(active);
-    }
-  };
+    },
+
+};
   Modify.init();
+
+
 
   var optionsForm = document.getElementById('options-form');
 
