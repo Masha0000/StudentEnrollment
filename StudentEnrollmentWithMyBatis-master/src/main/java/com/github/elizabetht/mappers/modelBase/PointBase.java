@@ -1,8 +1,14 @@
 package com.github.elizabetht.mappers.modelBase;
 import com.github.elizabetht.model.my.Point;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 
-public class PointBase {
-    int id;
+public class PointBase extends Entity  {
+
     double lat;
     double lon;
 
@@ -19,27 +25,4 @@ public class PointBase {
     }
 
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public double getLat() {
-        return lat;
-    }
-
-    public void setLat(int lat) {
-        this.lat = lat;
-    }
-
-    public double  getLon() {
-        return lon;
-    }
-
-    public void setLon(int lon) {
-        this.lon = lon;
-    }
 }

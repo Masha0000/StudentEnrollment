@@ -1,9 +1,12 @@
 package com.github.elizabetht.service.my;
 
+import com.github.elizabetht.mappers.modelBase.ListFigureWithPoint;
 import com.github.elizabetht.model.my.BrokenLine;
 import com.github.elizabetht.model.my.Point;
 import com.github.elizabetht.model.my.Polygon;
 import com.github.elizabetht.model.my.Figure;
+
+import java.util.List;
 
 
 
@@ -14,7 +17,7 @@ import com.github.elizabetht.model.my.Figure;
 public interface FigureService {
     void insertFigure(Figure p);
 
-    Figure ReadModel();
+   List<Figure> ReadModel();
 
   //  void deleteFigure(Figure id);
 }

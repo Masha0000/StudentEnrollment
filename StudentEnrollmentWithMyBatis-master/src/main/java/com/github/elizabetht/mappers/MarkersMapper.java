@@ -2,54 +2,42 @@ package com.github.elizabetht.mappers;
 
 import com.github.elizabetht.mappers.modelBase.FigureBase;
 import com.github.elizabetht.mappers.modelBase.Figure_to_point;
+import com.github.elizabetht.mappers.modelBase.ListFigureWithPoint;
 import com.github.elizabetht.mappers.modelBase.PointBase;
 import com.github.elizabetht.model.my.Figure;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public interface MarkersMapper {
 
-         /*   @Insert("INSERT INTO your_database_name.your_table_name(column1_int, column2_str, column3_date, column4_time)","VALUES" +
-                        "<foreach item='each_item_name' index='index' collection='theCollection' open='' separator=',' close=''>" +
-                        "(" +
-                        "#{each_item_name.column1,jdbcType=INTEGER},",
-                "#{each_item_name.column2,jdbcType=VARCHAR},",
-                "(SELECT SOME_DB_FUNCTION(#{each_item_name.column3,jdbcType=DATE})),",
-                "#{each_item_name.period.start,jdbcType=TIME}" +
-                        ")" +
-                        "</foreach>;*/
-
-
-    final String INSERTFIGURE = "insert into figure (type) values (#{type})";
-
+    final String INSERTFIGURE = "Insert into figure (type)  value (#{type})";
     @Insert(INSERTFIGURE)
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insertFigure(FigureBase post);
 
 
-    final String INSERTPOINTLIST = "INSERT INTO MARKERS.POINT(LAT,LON) VALUES <foreach collection='pointArr'" +
-            "item='element' open='(' separator=','  close=')'> #{element.lat}, #{element.lon}";
-
-    @Insert(INSERTPOINTLIST)
+    @Insert("insert into Point (lat, lon) values (#{lat}, #{lon})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    void insertPoint(ArrayList<PointBase> pointArr);
+    void insertPoint(PointBase pointArr);
 
-    final String INSERTfiguretoPOINT = "INSERT INTO MARKERS.figure_to_point(figure_id,point_id,order) " +
-            "VALUES <foreach collection='figureToPointList'" +
-            "item='element' open='(' separator=','  close=')'> #{element.order}, #{element.id_figure}, #{element.id_point}";
 
-    @Insert(INSERTfiguretoPOINT)
+    @Insert("INSERT INTO figure_to_point(figure_id,point_id,orderPoint) " +
+            "VALUES (#{id_figure},#{id_point},#{orderPoint})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    void insert(ArrayList<Figure_to_point> figureToPointList);
+    void insert(Figure_to_point figureToPointList);
 
-    @Select("SELECT point.lat, point.lon, figure.id district from point join figure_to_point on figure_to_point.point_id=point.id join figure " +
-            "figure_to_point.figure_id=figure.id order by figure_to_point.order")
-//WHERE id = #{id}")
-    Figure selectFigure();//что делать с селектами
+    String SELECT_BY_VALUE="select f.id, f.type, p.lat, p.lon from figure f join figure_to_point ftp on f.id = ftp.figure_id join point p on ftp.point_id = p.id  order by  order by f.id,ftp.orderPoint;";
+
+    @Select(SELECT_BY_VALUE)
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "type", column = "type"),
+            @Result(property = "lat", column = "lat"),
+            @Result(property = "lon", column = "lon")})
+    List<ListFigureWithPoint> selectFigure();//что делать с селектами
 
 
     // void insertBatchSomething(@Param("theCollection") List<Something> theCollection);

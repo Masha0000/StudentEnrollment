@@ -18,7 +18,7 @@ public class DataConfig {
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
         dataSource.setDriverClass(com.mysql.jdbc.Driver.class);
         dataSource.setUsername("root");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/markers;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/markers");//;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
         dataSource.setPassword("73ubirev");
         return dataSource;
     }

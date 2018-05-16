@@ -62,34 +62,10 @@ coordinatesFeatureDel=features[0].getGeometry().getCoordinates();
 console.log(coordinatesFeatureDel);
 typeFeature=features[0].getGeometry().getType();
 console.log(typeFeature);
-/*
 
-var featureDelete = {
-        name: typeFeatureDel,
-        coords: coordinatesFeatureDel
-      };
-      // json["name"] = type;
-      // json["coordinates"] = coordinates;
-
-      $.ajax({
-        type: 'POST',
-        url:'/modify',
-        data: featureDelete, // JSON.stringify()
-        dataType:'json',
-        contentType:'application/json;charset=utf-8',
-        success:function(data){
-          console.log(data);
-        //  $("#answer").addClass("ok");
-        //  document.getElementById("answer").innerTexy = "Вы  добавили/изменили объект!"ж
-        }
-      }
-      )
-*/
 vector.getSource().removeFeature(features[0]);
-//console.log(features[0].id);
 selectedFeatures.forEach(selectedFeatures.remove, selectedFeatures);
-//console.log(id);
-//sdeleteFigure(id);
+
 });
 },
 setActive: function(active) {
@@ -132,15 +108,17 @@ var Modify = {
 
 
               console.log(typeFeature);
-              var feature = {
-                  name: typeFeature,
-                  coord: coordinates[0]
+              var FeatureJs =JSON.stringify( {
+                  'name': typeFeature,
+               //   'coord': coordinates[0]
+                  'coord': coordinates
 
-              };
+              });
               $.ajax({
-                      type: 'POST',
+
                       url:"/modify",
-                      data:  JSON.stringify(feature),
+                  type: 'POST',
+                      data: FeatureJs,
                       dataType:'json',
                       contentType:'application/json;charset=utf-8',
                       success:function(data){

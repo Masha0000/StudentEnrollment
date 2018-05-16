@@ -15,7 +15,7 @@ public class Figure {
         this.type = f.getType();
        for(int i=0;i<f.getSize();i++)
        {
-           this.list.set(i,new Point (f.getCoordinates(i,0),f.getCoordinates(i,1)));
+           this.list.set(i,new Point (f.getCoordinatesLat(i),f.getCoordinatesLat(i)));
        }
     }
     public String getType() {

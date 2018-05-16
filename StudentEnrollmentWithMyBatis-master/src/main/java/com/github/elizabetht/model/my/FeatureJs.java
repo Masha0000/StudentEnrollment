@@ -1,34 +1,40 @@
 package com.github.elizabetht.model.my;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.elizabetht.DTO.CoordinateDTO;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 //import ru.infoshell.parklook.persistence.model.user.MobileUserPosition;
 
 @Data//@Data
 //Все вместе сейчас: Ярлык для @ToString, @EqualsAndHashCode, @Getterна всех полях, и @Setterна всех не конечных полей, и @RequiredArgsConstructor!
 @NoArgsConstructor//озданные конструкторы: генерирует конструкторы, которые не принимают никаких аргументов, один аргумент за окончательное / ненулевое поле или один аргумент для каждого поля.
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FeatureJs {
-    private String type;
-    private Double [][] coordinates;
+public class FeatureJs  implements Serializable {
+    @JsonProperty("coord")
+    private ArrayList<CoordinateDTO> coord;
 
-    public FeatureJs(String type, Double[][] coordinates) {
-        this.type = type;
-        this.coordinates = coordinates;
+    @JsonProperty("name")
+    private String name;
+
+    public Double getCoordinatesLat(int i) {
+        return coord.get(i).getLat();
     }
-
-
-    public Double getCoordinates(int i,int j) {
-        return coordinates[i][j];
+    public Double getCoordinatesLon(int i) {
+        return coord.get(i).getLon();
     }
-
     public int getSize()
     {
-        return this.coordinates.length;
+        return this.coord.size();
     }
 
     public String getType()
     {
-        return this.type;
+        return this.name;
     }
 }

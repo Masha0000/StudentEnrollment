@@ -1,5 +1,6 @@
 package com.github.elizabetht.controller.my;
 
+import com.github.elizabetht.DTO.CoordinateDTO;
 import com.github.elizabetht.model.my.*;
 import com.github.elizabetht.service.my.FigureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,18 +9,26 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class MarkersController {
     @Autowired
     private FigureService figureService;
 
-    @RequestMapping(value ="/modify",method = RequestMethod.POST)
-    public String saveFigure(@RequestBody FeatureJs marker)//{ throws NotFoundException {
+    @RequestMapping(value = "/modify", method = RequestMethod.POST)
+    public String saveFigure( FeatureJs marker)//{ throws NotFoundException {@RequestBody
     {
-        Figure markerController = new Figure(marker);
+         System.out.print(marker.getName()+"Name");
+
+      //= new Figure(marker);
+        ArrayList<Point> a=new ArrayList<Point>();
+        a.add(new Point(2.0, 4.0));
+        a.add(new Point(4.0, 8.0));
+        Figure markerController=new Figure("Poligon",a);
         figureService.insertFigure(markerController);
-       // model.addAttribute("message", "Saved figures");
-        return "marker";//???
+                return "marker";//???
     }
 
     @RequestMapping(value = "/")
@@ -27,22 +36,22 @@ public class MarkersController {
         model.addAttribute("message", "Open");
         return "index";//???
     }
-/*
-    @RequestMapping(value = "/marker",method=RequestMethod.POST)
-    public String saveFigure(Model model) {
-        model.addAttribute("message", "Open");
-        return "marker";//???
-    }*/
 
-
-
-    @RequestMapping(value = "/marker",method=RequestMethod.GET)
+    @RequestMapping(value = "/marker", method = RequestMethod.GET)
     public String openMap(Model model) {
         model.addAttribute("message", "Open");
         return "marker";//???
     }
+
+    @RequestMapping(value = "/getfeature", method = RequestMethod.GET)
+    public @ResponseBody List<Figure> getFeature(Model model) {
+        List<Figure> figureList=figureService.ReadModel();
+       // model.addAttribute(figureList);
+       // model.addAttribute("message", "Open");
+        return figureList ;//???
+    }
 }
-    //        @RequestMapping(value="/delete", method=RequestMethod.POST)
+//        @RequestMapping(value="/delete", method=RequestMethod.POST)
 //        public String delete(@ModelAttribute("markers") Integer id, Model model) {
 //
 //            figureService.deleteFigure(id);
